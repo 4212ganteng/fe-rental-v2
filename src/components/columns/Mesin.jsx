@@ -9,12 +9,11 @@ export const Mesin = [
   },
   {
     title: "Merek ",
-    dataIndex: "merek",
+    dataIndex: "merekName",
     key: "_id",
-    render: (merek) => (
-      <span>{merek ? merek?.typeMesin?.toUpperCase() : merek?.typeMesin}</span>
-    ),
+    render: (val) => <span>{val ? val.toUpperCase() : val}</span>,
   },
+
   {
     title: "Serial Number",
     dataIndex: "sn",

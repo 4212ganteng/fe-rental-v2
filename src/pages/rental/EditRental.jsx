@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Buttoncomp from "../../components/atom/Buttoncomp";
 import Rental from "../../components/form/Rental";
 import { API } from "../../config/api";
+import { toast } from "react-toastify";
 
 export default function EditRental() {
   const { id } = useParams();
@@ -14,8 +15,15 @@ export default function EditRental() {
 
   const getbyId = async () => {
     const res = await API.get(`/rental/detail/${id}`);
+    console.log("result", res.data);
 
     setRental(res.data.rental);
+    setPost({
+      customerId: res.data.rental.customer.company,
+      merekId: res?.data?.merek?._id,
+      newProduct: res.data.rental.product.sn,
+      // ...res.data.rental,
+    });
   };
 
   const findCust = async () => {
@@ -24,7 +32,7 @@ export default function EditRental() {
   };
 
   const mesin = async () => {
-    const res = await API.get(`machine/mesin/${post.merekId}`);
+    const res = await API.get(`machine/mesin/${post?.merekId}`);
     setSn(res.data.data);
   };
   const type = async () => {
@@ -42,7 +50,7 @@ export default function EditRental() {
   const onchangeSN = (val) => {
     setPost({
       ...post,
-      productId: val,
+      newProduct: val,
     });
   };
   const onchangetype = (val) => {
@@ -59,6 +67,13 @@ export default function EditRental() {
     });
   };
 
+  const onchangeKeterangan = (status) => {
+    setPost({
+      ...post,
+      keterangan: status,
+    });
+  };
+
   useEffect(() => {
     getbyId();
     findCust();
@@ -69,7 +84,18 @@ export default function EditRental() {
     mesin();
   }, [post]);
 
-  console.log({ rental });
+  const updateRent = async () => {
+    try {
+      const res = await API.patch(`/rental/update/${id}`, post);
+      toast.success("berhasil update rental");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.error.message);
+    }
+  };
+  console.log(sn);
+  console.log(post);
   return (
     <>
       <>
@@ -79,23 +105,25 @@ export default function EditRental() {
               label: cus.company,
               value: cus._id,
             }))}
-            value={rental?.customer.company}
+            value={post.customerId}
             onchangecust={onchangecust}
             sn={sn?.map((serial) => ({
               label: serial.sn,
               value: serial._id,
             }))}
-            valsn={rental?.product.sn}
+            valsn={post.newProduct}
             typeMesin={typemesin?.map((item) => ({
               label: item.typeMesin,
               value: item._id,
             }))}
-            valtype={rental?.merek?.typeMesin}
+            valtype={post.merekId}
             onchangeSN={onchangeSN}
             onchangeType={onchangetype}
             handleChange={handleChange}
+            onchangeKeterangan={onchangeKeterangan}
+            data={rental}
           />
-          <Buttoncomp title="submit" />
+          <Buttoncomp title="submit" onclick={updateRent} />
         </div>
       </>
     </>

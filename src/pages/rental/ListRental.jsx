@@ -1,16 +1,14 @@
 import { Button } from "antd";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { API } from "../../config/api";
 import Tablecom from "../../components/Tablecom";
+import { API } from "../../config/api";
 
 const ListRental = () => {
   const [rental, setrental] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [openedit, setOpenedit] = useState(false);
-  const [idexUpdate, setIndexUpdate] = useState();
-  const [update, setupdate] = useState();
+
   const navigate = useNavigate();
 
   // get rentals
@@ -37,6 +35,9 @@ const ListRental = () => {
     }
   };
 
+  const cvTime = (val) => {
+    return moment(val).format("DD/MM/YY");
+  };
   return (
     <>
       <div className="container px-5 h-screen">
@@ -52,13 +53,28 @@ const ListRental = () => {
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
+                  #
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  ID Pelanggan
+                </th>
+                <th scope="col" className="px-6 py-3">
                   Pelanggan
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Mesin
                 </th>
                 <th scope="col" className="px-6 py-3">
+                  Merek
+                </th>
+                <th scope="col" className="px-6 py-3">
                   Durasi
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Awal Rental
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Akhir Rental
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Harga
@@ -71,7 +87,12 @@ const ListRental = () => {
             <tbody>
               {rental?.map((item, index) => (
                 <Tablecom
-                  customer={item.customer.company}
+                  idpl={item?.customer.idpl}
+                  merek={item?.product.merekName.toUpperCase()}
+                  end={item.endDate ? cvTime(item.endDate) : null}
+                  start={item.startDate ? cvTime(item.startDate) : null}
+                  no={item.customer.company}
+                  customer={index + 1}
                   machine={item.product.sn.toUpperCase()}
                   duration={item.duration}
                   price={item.values.toLocaleString("id-ID")}

@@ -11,6 +11,11 @@ const Tablecom = ({
   onclick,
   keyId,
   handleRemove,
+  no,
+  start,
+  end,
+  merek,
+  idpl,
 }) => {
   return (
     <>
@@ -27,8 +32,13 @@ const Tablecom = ({
 
         {!edit ? (
           <>
+            <td className="px-6 py-4">{idpl}</td>
+            <td className="px-6 py-4">{no}</td>
             <td className="px-6 py-4">{machine}</td>
+            <td className="px-6 py-4">{merek}</td>
             <td className="px-6 py-4">{duration} Bulan</td>
+            <td className="px-6 py-4">{start} </td>
+            <td className="px-6 py-4">{end} </td>
             <td className="px-6 py-4">Rp{price}</td>
             {!show ? (
               <td className="px-6 py-4 text-center flex justify-between">
@@ -39,6 +49,7 @@ const Tablecom = ({
           </>
         ) : (
           <>
+            <td className="px-6 py-4">{no}</td>
             <td className="px-6 py-4">{machine}</td>
             <td className="px-6 py-4">{duration} </td>
             <td className="px-6 py-4">{price}</td>

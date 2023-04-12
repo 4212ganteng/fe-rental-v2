@@ -50,6 +50,7 @@ export default function SearchByCust() {
 
   console.log({ result });
   console.log({ mesin });
+  console.log({ customer });
 
   return (
     <div className="">
@@ -70,8 +71,8 @@ export default function SearchByCust() {
           filterOption={(input, option) =>
             (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
           }
-          options={customer.map((item, index) => ({
-            label: item.company.toUpperCase(),
+          options={customer?.map((item, index) => ({
+            label: item?.company?.toUpperCase(),
             value: item._id,
           }))}
           // value={rental?.customerId.toUpperCase()}
@@ -118,7 +119,7 @@ export default function SearchByCust() {
                     </tr>
                   </thead>
                   <tbody>
-                    {result.map((item) => (
+                    {result?.map((item) => (
                       <Tablecom
                         customer={item.product.merek}
                         machine={item.product.sn}

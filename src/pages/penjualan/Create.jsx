@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from "react";
-import Rental from "../../components/form/Rental";
-import { API } from "../../config/api";
-import Buttoncomp from "../../components/atom/Buttoncomp";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { API } from "../../config/api";
+import { toast } from "react-toastify";
+import Rental from "../../components/form/Rental";
+import Buttoncomp from "../../components/atom/Buttoncomp";
+import Penjualan from "../../components/form/Penjualan";
 
-const CreateRent = () => {
+export default function Create() {
   const [customer, setcustomer] = useState();
   const [typemesin, setTypeMesin] = useState();
   const [sn, setSn] = useState();
-  const [dateRange, setDateRange] = useState([]);
   const [post, setPost] = useState();
   const navigate = useNavigate("/");
   const findCust = async () => {
     const res = await API.get("/customer/");
+    console.log("cuss", res);
     setcustomer(res.data.data.customer);
   };
   const mesin = async () => {
     const res = await API.get(`machine/mesin/${post.merekId}`);
+    console.log("mesin", res);
     setSn(res.data.data);
   };
   const type = async () => {
@@ -27,9 +29,9 @@ const CreateRent = () => {
 
   const addmesin = async () => {
     try {
-      const res = await API.post("/rental/create", post);
-      toast.success("berhasil add rental");
-      navigate("/");
+      const res = await API.post("/penjualan/create", post);
+      toast.success("berhasil add penjualan");
+      navigate("/selling");
     } catch (error) {
       toast.error(error.response.data.error.message);
       console.log(error);
@@ -72,43 +74,39 @@ const CreateRent = () => {
     });
   };
 
-  const handleDateRangeChange = (dates, dateStrings) => {
+  const onChangeDate = (date, dateString) => {
     setPost({
       ...post,
-      startDate: dateStrings[0],
-      endDate: dateStrings[1],
+      date: dateString,
     });
   };
 
   console.log({ post });
   return (
-    <>
-      <div>
-        <Rental
-          cust={customer?.map((cus) => ({
-            label: cus.company,
-            value: cus._id,
-          }))}
-          sn={sn?.map((serial) => ({
-            label: serial.sn,
-            value: serial._id,
-          }))}
-          typeMesin={typemesin?.map((item) => ({
-            label: item.typeMesin,
-            value: item._id,
-          }))}
-          onchangecust={onchangecust}
-          onchangeSN={onchangeSN}
-          onchangeType={onchangetype}
-          // data={}
-          handleChange={handleChange}
-          handleDateRangeChange={handleDateRangeChange}
-          dateRange={dateRange}
-        />
-        <Buttoncomp onclick={addmesin} title="submit" />
-      </div>
-    </>
-  );
-};
+    <div>
+      <h1>Penjualan</h1>
+      <Penjualan
+        cust={customer?.map((cus) => ({
+          label: cus.company,
+          value: cus._id,
+        }))}
+        sn={sn?.map((serial) => ({
+          label: serial.sn,
+          value: serial._id,
+        }))}
+        typeMesin={typemesin?.map((item) => ({
+          label: item.typeMesin,
+          value: item._id,
+        }))}
+        onchangecust={onchangecust}
+        onchangeSN={onchangeSN}
+        onchangeType={onchangetype}
+        // data={}
+        handleChange={handleChange}
+        onChangeDate={onChangeDate}
+      />
 
-export default CreateRent;
+      <Buttoncomp onclick={addmesin} title="submit" />
+    </div>
+  );
+}

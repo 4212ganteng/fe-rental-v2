@@ -49,16 +49,16 @@ const Layouts = ({ children }) => {
               title={
                 <span>
                   <UserOutlined />
-                  <span>Rental</span>
+                  <span>Transaksi</span>
                 </span>
               }
             >
               <Menu.Item key="3">
                 <Link to="/">Rental</Link>
               </Menu.Item>
-              {/* <Menu.Item key="4">
-                <Link to="/user/bill">Bill</Link>
-              </Menu.Item> */}
+              <Menu.Item key="4">
+                <Link to="/selling">Penjualan</Link>
+              </Menu.Item>
             </SubMenu>
             <SubMenu
               key="sub2"

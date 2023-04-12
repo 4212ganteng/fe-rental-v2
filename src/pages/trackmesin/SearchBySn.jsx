@@ -1,9 +1,10 @@
+import { Table } from "antd";
+import moment from "moment";
 import React, { useState } from "react";
-import { API } from "../../config/api";
-import { Space, Table, Tag } from "antd";
 import { toast } from "react-toastify";
 import Tablecom from "../../components/Tablecom";
-import moment from "moment";
+import { track } from "../../components/columns/TrackSn";
+import { API } from "../../config/api";
 const { Column, ColumnGroup } = Table;
 
 export default function SearchBySn() {
@@ -31,6 +32,7 @@ export default function SearchBySn() {
   const date = moment(mesin?.date).format("MMM Do YY");
   console.log({ mesin });
   console.log({ date });
+  console.log({ result });
   return (
     <>
       <div className="h-screen">
@@ -90,6 +92,7 @@ export default function SearchBySn() {
         </form>
 
         {/* table */}
+
         <div>
           {loading ? (
             <p className="text-center"> sabar... Loading cuy..</p>
@@ -104,40 +107,8 @@ export default function SearchBySn() {
             />
           ) : (
             <div>
-              <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                      <th scope="col" className="px-6 py-3">
-                        #
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Pelanggan
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Durasi
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Harga
-                      </th>
-                      {/* <th scope="col" className="px-6 py-3">
-                    <span className="">Actions</span>
-                  </th> */}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {result?.map((item, index) => (
-                      <Tablecom
-                        customer={index + 1}
-                        machine={item.customer.map((data) => data.company)}
-                        duration={item.duration}
-                        price={item.values.toLocaleString("id-ID")}
-                        key={item._id}
-                        show={true}
-                      />
-                    ))}
-                  </tbody>
-                </table>
+              <div>
+                <Table columns={track} dataSource={result} />
               </div>
 
               {/* mesin detail */}

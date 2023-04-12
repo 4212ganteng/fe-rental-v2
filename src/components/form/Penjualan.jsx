@@ -1,11 +1,10 @@
-import React from "react";
-import SelectComp from "../atom/SelectComp";
-import Inputcomp from "../atom/Inputcomp";
 import { DatePicker } from "antd";
-import moment from "moment";
+import React from "react";
+import Inputcomp from "../atom/Inputcomp";
+import SelectComp from "../atom/SelectComp";
 const { RangePicker } = DatePicker;
 
-export default function Rental({
+export default function Penjualan({
   onchangeType,
   onchangeSN,
   onchangecust,
@@ -18,8 +17,7 @@ export default function Rental({
   valsn,
   valtype,
   onchangeKeterangan,
-  handleDateRangeChange,
-  dateRange,
+  onChangeDate,
 }) {
   const keterangan = [
     {
@@ -50,7 +48,6 @@ export default function Rental({
             value={value}
           />
         </div>
-
         <div className="w-full">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
             Pilih Typemesin
@@ -73,48 +70,24 @@ export default function Rental({
             value={valsn}
           />
         </div>
-
-        <div className="max-w-lg">
-          <Inputcomp
-            name="duration"
-            title="Durasi"
-            type="number"
-            placeholder={data?.duration}
-            onchange={handleChange}
-            // val=
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Tangal Penjualan
+          </label>
+          <DatePicker
+            className="w-full"
+            onChange={onChangeDate}
+            // defaultValue={moment(val?.date)}
           />
-
-          <div className="w-full">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Tanggal Rental
-            </label>
-            <RangePicker
-              format="YYYY-MM-DD"
-              onChange={handleDateRangeChange}
-              // value={dateRange}
-            />
-          </div>
-
-          <Inputcomp
-            name="values"
-            title="Harga"
-            type="number"
-            placeholder={data?.values}
-            onchange={handleChange}
-            // val=
-          />
-
-          <div className="w-full">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Keterangan
-            </label>
-            <SelectComp
-              onChange={onchangeKeterangan}
-              options={keterangan}
-              placeholder="init"
-            />
-          </div>
         </div>
+        <Inputcomp
+          name="values"
+          title="Harga"
+          type="number"
+          placeholder={data?.values}
+          onchange={handleChange}
+          // val=
+        />
       </div>
     </>
   );
