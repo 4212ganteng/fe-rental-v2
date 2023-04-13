@@ -52,23 +52,9 @@ export const Mesin = [
     key: "_id",
     render: (value) => <span>{`Rp ${value.toLocaleString("id-ID")}`}</span>,
   },
-  //   {
-  //     title: "Actions",
-  //     dataIndex: "_id",
-  //     key: "_id",
-  //     render: (value) => (
-  //       <div>
-  //         <Button
-  //           onClick={() => {
-  //             setOpenedit(true);
-  //             setCustomerEdit(machine.find((c) => c._id === value));
-  //           }}
-  //         >
-  //           Edit
-  //         </Button>
-
-  //         <Button onClick={() => handleDelete(value)}>delete</Button>
-  //       </div>
-  //     ),
-  //   },
+  {
+    title: "Status",
+    dataIndex: "status",
+    key: "_id",
+  },
 ];

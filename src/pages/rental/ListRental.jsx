@@ -1,10 +1,11 @@
-import { Button } from "antd";
+import { Button, Table } from "antd";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Tablecom from "../../components/Tablecom";
 import { API } from "../../config/api";
+import { Rental } from "../../components/columns/Rental";
 
 const ListRental = () => {
   const [rental, setrental] = useState([]);
@@ -34,6 +35,21 @@ const ListRental = () => {
       console.log(error);
     }
   };
+  const handleTarik = async (id) => {
+    try {
+      let answer = window.confirm(
+        "tarik mesin akan merubah status mesin dan pelanggan menjadi off"
+      );
+      if (answer) {
+        const response = await API.patch(`/rental/tarik/${id}`);
+        get();
+        toast.success("berhasil berhasil tarik mesin");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.error.message);
+    }
+  };
 
   const cvTime = (val) => {
     return moment(val).format("DD/MM/YY");
@@ -47,8 +63,11 @@ const ListRental = () => {
         >
           Rental Baru
         </Button>
-
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <Table columns={Rental} dataSource={rental} />
+        </div>
+
+        {/* <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
@@ -99,11 +118,12 @@ const ListRental = () => {
                   key={item._id}
                   onclick={() => navigate(`/update/${item._id}`)}
                   handleRemove={() => handleRemove(item._id)}
+                  tarik={() => handleTarik(item._id)}
                 />
               ))}
             </tbody>
           </table>
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -137,7 +137,10 @@ export default function CustForm({
           onchange={handleChange}
         />
 
-        <Uploadcom />
+        <Uploadcom nameimg="spk" onchange={handleChange} />
+        <Uploadcom nameimg="kwitansi" onchange={handleChange} />
+        <Uploadcom nameimg="sj" onchange={handleChange} />
+        <Uploadcom nameimg="oha" onchange={handleChange} />
       </div>
     </>
   );

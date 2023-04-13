@@ -92,6 +92,7 @@ export default function Rental({
               format="YYYY-MM-DD"
               onChange={handleDateRangeChange}
               // value={dateRange}
+              className="w-full"
             />
           </div>
 
@@ -111,7 +112,7 @@ export default function Rental({
             <SelectComp
               onChange={onchangeKeterangan}
               options={keterangan}
-              placeholder="init"
+              placeholder="ISI JIKA UPGRADE / DOWNGRADE SAJA"
             />
           </div>
         </div>

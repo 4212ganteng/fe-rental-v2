@@ -148,46 +148,31 @@ const Listmachine = () => {
             <Table columns={Mesin} dataSource={machine} />
           </div>
         </Tabs.Item>
-        <Tabs.Item title="Aktif">
+        <Tabs.Item title="Ready">
           {" "}
           <div className="container px-5 h-screen">
-            <Button
-              className="bg-blue-400 my-4"
-              onClick={() => navigate("/add-mesin")}
-            >
-              Tambah Mesin
-            </Button>
+            {/* <h1>Total : {}</h1> */}
 
             <Table columns={Mesin} dataSource={aktif} />
           </div>
         </Tabs.Item>
-        <Tabs.Item title="Sell">
+        <Tabs.Item title="Mesin Terjual">
           {" "}
           <div className="container px-5 h-screen">
-            <Button
-              className="bg-blue-400 my-4"
-              onClick={() => navigate("/add-mesin")}
-            >
-              Tambah Mesin
-            </Button>
+            {/* <h1>Total : {}</h1> */}
 
             <Table columns={Mesin} dataSource={sell} />
           </div>
         </Tabs.Item>
-        <Tabs.Item title="Rent">
+        <Tabs.Item title="Mesin Tersewa">
           {" "}
           <div className="container px-5 h-screen">
-            <Button
-              className="bg-blue-400 my-4"
-              onClick={() => navigate("/add-mesin")}
-            >
-              Tambah Mesin
-            </Button>
+            {/* <h1>Total : {}</h1> */}
 
             <Table columns={Mesin} dataSource={rent} />
           </div>
         </Tabs.Item>
-        <Tabs.Item title="Disabled">Disabled content</Tabs.Item>
+        {/* <Tabs.Item title="Disabled">Disabled content</Tabs.Item> */}
       </Tabs.Group>
     </>
   );

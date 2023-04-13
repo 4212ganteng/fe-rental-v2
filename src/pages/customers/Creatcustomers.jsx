@@ -14,7 +14,8 @@ export default function Creatcustomers() {
   const handleChange = (e) => {
     setPost({
       ...post,
-      [e.target.name]: e.target.value,
+      [e.target.name]:
+        e.target.type === "file" ? e.target.files[0] : e.target.value,
     });
   };
 
@@ -40,13 +41,29 @@ export default function Creatcustomers() {
     });
   };
 
-  const create = async () => {
+  const create = async (e) => {
+    e.preventDefault();
     if (!post.email) {
       return toast.error("Email is required");
     }
+
+    const formData = new FormData();
+    formData.append("address", post.address);
+    formData.append("company", post.company);
+    formData.append("email", post.email);
+    formData.append("hp", post.hp);
+    formData.append("idpl", post.idpl);
+    formData.append("joinDate", post.joinDate);
+    formData.append("kwitansi", post.kwitansi);
+    formData.append("layanan", post.layanan);
+    formData.append("name", post.name);
+    formData.append("oha", post.oha);
+    formData.append("sj", post.sj);
+    formData.append("spk", post.spk);
+    formData.append("status", post.status);
     try {
       setLoading(true);
-      const res = await API.post("/customer/create", post);
+      const res = await API.post("/customer/multi", formData);
       setLoading(false);
       toast.success("berhasli tambah data");
       setTimeout(() => {
@@ -60,6 +77,7 @@ export default function Creatcustomers() {
   };
 
   console.log({ post });
+  console.log("spk", post.spk);
 
   return (
     <>

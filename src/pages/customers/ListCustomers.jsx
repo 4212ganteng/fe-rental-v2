@@ -33,6 +33,7 @@ const ListCustomers = () => {
     }
   };
 
+  console.log({ customer });
   // const handleUpdate = async () => {
   //   setLoading(true);
   //   try {
@@ -76,7 +77,7 @@ const ListCustomers = () => {
         <p className="bg-white text-center">Sabar cuy.. Sedang loading..</p>
       ) : (
         <>
-          <div className="container px-5 h-screen">
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg h-screen">
             <Button
               className="bg-blue-400 my-4"
               onClick={() => navigate("/add-cust")}

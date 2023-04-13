@@ -16,6 +16,7 @@ const Tablecom = ({
   end,
   merek,
   idpl,
+  tarik,
 }) => {
   return (
     <>
@@ -42,8 +43,18 @@ const Tablecom = ({
             <td className="px-6 py-4">Rp{price}</td>
             {!show ? (
               <td className="px-6 py-4 text-center flex justify-between">
-                <button onClick={onclick}>Upgrade & Downgrade</button>
-                {/* <button onClick={handleRemove}>Delete</button> */}
+                <button
+                  className="mr-3 bg-sky-500 rounded-lg px-5 py-1 text-white hover:bg-sky-600"
+                  onClick={tarik}
+                >
+                  Tarik
+                </button>
+                <button
+                  className="mr-3 bg-sky-500 rounded-md px-2 py-1 text-slate-100 hover:bg-sky-600"
+                  onClick={onclick}
+                >
+                  Upgrade & Downgrade
+                </button>
               </td>
             ) : null}
           </>
