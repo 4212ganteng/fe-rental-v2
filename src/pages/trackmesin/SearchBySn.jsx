@@ -2,7 +2,7 @@ import { Table } from "antd";
 import moment from "moment";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import Tablecom from "../../components/Tablecom";
+import Tabledetail from "../../components/Tabledetail";
 import { track } from "../../components/columns/TrackSn";
 import { API } from "../../config/api";
 const { Column, ColumnGroup } = Table;
@@ -100,11 +100,7 @@ export default function SearchBySn() {
         </div>
         <div>
           {result.length <= 0 ? (
-            <img
-              src="http://www.clipartbest.com/cliparts/4ib/6y9/4ib6y9erT.gif"
-              alt=""
-              className="mx-auto"
-            />
+            <p>silahkan search di atas</p>
           ) : (
             <div>
               <div>
@@ -115,40 +111,17 @@ export default function SearchBySn() {
               <h2 className="text-center text-lg font-semibold font-sans my-3">
                 Mesin Detail
               </h2>
-              <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                      <th scope="col" className="px-6 py-3">
-                        Merek
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        No Seri
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Tanggal Perolehan
-                      </th>
 
-                      <th scope="col" className="px-6 py-3">
-                        Jenis
-                      </th>
-
-                      {/* <th scope="col" className="px-6 py-3">
-                    <span className="">Actions</span>
-                  </th> */}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <Tablecom
-                      customer={mesin?.merek?.typeMesin}
-                      machine={mesin?.sn}
-                      duration={date}
-                      price={mesin.jenis}
-                      key={mesin._id}
-                      edit={true}
-                    />
-                  </tbody>
-                </table>
+              <div>
+                <Tabledetail>
+                  <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    <td class="px-6 py-4">{mesin.merekName}</td>
+                    <td class="px-6 py-4">{mesin.sn}</td>
+                    <td class="px-6 py-4">
+                      {moment(mesin?.date).format("DD/MM/YY")}
+                    </td>
+                  </tr>
+                </Tabledetail>
               </div>
             </div>
           )}

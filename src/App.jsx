@@ -13,6 +13,7 @@ import Creatcustomers from "./pages/customers/Creatcustomers";
 import CreateMesin from "./pages/machine/CreateMesin";
 import Create from "./pages/penjualan/Create";
 import List from "./pages/penjualan/List";
+import Faktur from "./pages/rental/Faktur";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/create-rental" element={<CreateRent />} />
           <Route path="/update/:id" element={<EditRental />} />
           <Route path="/" element={<ListRental />} />
+          <Route path="/faktur/:id" element={<Faktur />} />
 
           <Route path="add-sale" element={<Create />} />
           <Route path="/selling" element={<List />} />

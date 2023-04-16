@@ -10,12 +10,12 @@ const handleTarik = async (id) => {
     );
     if (answer) {
       const response = await API.patch(`/rental/tarik/${id}`);
-      get();
+
       toast.success("berhasil berhasil tarik mesin");
     }
   } catch (error) {
     console.log(error);
-    toast.error(error.response.data.error.message);
+    toast.error("gagal tarik mesin");
   }
 };
 
@@ -98,7 +98,7 @@ export const Rental = [
     render: (value) => (
       <div>
         <button
-          className="mr-3 mb-3 bg-sky-500 rounded-lg px-4 py-1 text-white hover:bg-sky-600"
+          className="mr-3 mb-3 bg-sky-500 rounded-lg px-4 py-1 text-white hover:bg-sky-600 "
           onClick={() => handleTarik(value)}
         >
           Tarik Mesin

@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const track = [
   {
     title: "#",
@@ -20,9 +22,11 @@ export const track = [
   {
     title: "Awal sewa",
     dataIndex: "startDate",
+    render: (value) => moment(value).format("DD/MM/YY"),
   },
   {
     title: "Akhir sewa",
     dataIndex: "endDate",
+    render: (value) => moment(value).format("DD/MM/YY"),
   },
 ];
