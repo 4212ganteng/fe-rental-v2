@@ -1,6 +1,6 @@
 import axios from "axios";
 export const API = axios.create({
-  baseURL: "http://localhost:6001/erp",
+  baseURL: "http://103.115.164.244:6001/erp",
 });
 
 export const setAuthToken = (token) => {
